@@ -1,4 +1,12 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
+
+def buildTime() {
+    def df = new SimpleDateFormat("yyMMddhhmm")
+    return df.format(new Date())
+}
+
 
 android {
     compileSdkVersion 23
@@ -10,6 +18,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        setProperty("archivesBaseName", "HERC-MobileWorkFlow-$versionName")
     }
 
     signingConfigs {
@@ -24,6 +33,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
